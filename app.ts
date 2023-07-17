@@ -1,1 +1,3 @@
-console.log(3);
+import { Server } from "./models/server";
+
+new Server();
