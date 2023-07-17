@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import { conexionDB } from "../database/conexionDB";
+import { routerUsuarios } from "../routes/usuario";
 
 export class Server {
   app: Express;
@@ -19,7 +20,9 @@ export class Server {
     this.app.use(express.json());
   }
 
-  routes(): void {}
+  routes(): void {
+    this.app.use("/usuarios", routerUsuarios);
+  }
 
   listen(): void {
     this.app.listen(8080, () => {
