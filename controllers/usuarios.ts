@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { InterfaceUsuario, Usuario } from "../models/usuario";
-import { Gasto } from "../models/gastos";
 
 export const createUsuario = async (req: Request, res: Response) => {
   const usuarioInformation: InterfaceUsuario = req.body;
@@ -22,19 +21,34 @@ export const createUsuario = async (req: Request, res: Response) => {
     return;
   }
 
-  const findGastosObjectID = await Gasto.findOne({ dniTitularDeGasto: dni }, { new: true });
-
   const newUsuario = new Usuario({
     dni: dni,
     nombre: nombre,
     apellido: apellido,
-    gastos: findGastosObjectID?._id,
+    gastos: [],
   });
   await newUsuario.save();
 
   res.json({
     msj: "Se ha creado el usuario correctamente",
     usuarioInformation,
-    gastos: findGastosObjectID?._id,
+  });
+};
+
+export const getUsuario = async (req: Request, res: Response) => {
+  const { dniUser } = req.params;
+
+  if (!dniUser) {
+    res.json({
+      msj: "Se nesecita un dni pasado por parametro de url para continuar",
+    });
+    return;
+  }
+
+  const findUser = await Usuario.findOne({ dni: dniUser });
+
+  res.json({
+    msj: "Este es el usuario que se encontró",
+    findUser,
   });
 };

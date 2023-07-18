@@ -23,7 +23,7 @@ const usuarioSchema = new Schema<InterfaceUsuario>({
   },
   gastos: {
     type: [Schema.Types.ObjectId],
-    ref: "gastos",
+    ref: "Gastos",
   },
 });
 
