@@ -1,15 +1,15 @@
-import { Model, Schema, model } from "mongoose";
+import { Model, ObjectId, Schema, model } from "mongoose";
 
 export interface InterfaceGastos {
   fechaDeGasto: Date;
   dniTitularDeGasto: number;
   importe: number;
+  objectIdUser: ObjectId;
 }
 
 const gastoSchema = new Schema<InterfaceGastos>({
   fechaDeGasto: {
     type: Date,
-    required: true,
   },
   dniTitularDeGasto: {
     type: Number,
@@ -18,6 +18,10 @@ const gastoSchema = new Schema<InterfaceGastos>({
   importe: {
     type: Number,
     required: true,
+  },
+  objectIdUser: {
+    type: Schema.Types.ObjectId,
+    ref: "Usuarios",
   },
 });
 

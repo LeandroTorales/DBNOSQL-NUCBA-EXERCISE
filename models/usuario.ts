@@ -4,7 +4,7 @@ export interface InterfaceUsuario {
   dni: number;
   nombre: string;
   apellido: string;
-  gastos: ObjectId;
+  gastos: [ObjectId];
 }
 
 const usuarioSchema = new Schema<InterfaceUsuario>({
@@ -22,8 +22,8 @@ const usuarioSchema = new Schema<InterfaceUsuario>({
     required: true,
   },
   gastos: {
-    type: Schema.Types.ObjectId,
-    ref: "gastos",
+    type: [Schema.Types.ObjectId],
+    ref: "Gastos",
   },
 });
 

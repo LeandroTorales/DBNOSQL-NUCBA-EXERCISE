@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import { conexionDB } from "../database/conexionDB";
 import { routerUsuarios } from "../routes/usuario";
+import { routerGastos } from "../routes/gastos";
 
 export class Server {
   app: Express;
@@ -22,6 +23,7 @@ export class Server {
 
   routes(): void {
     this.app.use("/usuarios", routerUsuarios);
+    this.app.use("/gastos", routerGastos);
   }
 
   listen(): void {
