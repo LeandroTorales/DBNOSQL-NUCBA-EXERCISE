@@ -23,7 +23,6 @@ export class Server {
 
   routes(): void {
     this.app.use("/usuarios", routerUsuarios);
-    this.app.use("/gastos", routerGastos);
   }
 
   listen(): void {
